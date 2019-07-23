@@ -1,0 +1,109 @@
+ <!DOCTYPE html>
+ <html lang="en">
+ <head>
+	 <meta charset="UTF-8">
+	 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+	 <meta http-equiv="X-UA-Compatible" content="ie=edge">
+	 <title>Document</title>
+	 	
+ </head>
+ <body>
+	<canvas id="myCanvas" width="1200" height="200" style="border:solid #000"> </canvas>	 
+  
+
+	 <script >
+		const canvas = document.getElementById("myCanvas");
+		const context = canvas.getContext("2d");
+
+
+		let x = 50;
+		let y = 50;
+		let xChange= 1 ;
+		let yChange = 1;
+		const blobCount = 10;
+		const colors = new Array("red","yellow","orange","pink","green","purple","grren","brown")
+
+		let blobs = new Array();
+		
+		class Blob
+		{
+			constructor(color,size)
+			{
+				this.x = Math.random()* canvas.width;
+				this.y = Math.random()* canvas.height;
+				this.color = color;
+				this.size = size;
+				this.xChange = 1;
+				this.yChange = 1;
+			}
+			move()
+			{
+
+				if(this.x>=canvas.width || this.x<=0){	
+					this.xChange *= -1;
+				} 
+		 
+			
+				if(this.y>=canvas.height || this.y<=0){	
+					this.yChange *= -1;
+				} 
+			 
+				this.x+= this.xChange;
+				this.y+= this.yChange;
+			}
+		
+			draw()
+			{
+				context.beginPath();
+				context.arc(this.x, this.y, this.size, 0, 2*Math.PI);
+				context.fillStyle = this.color;
+				context.fill();
+				context.stroke();
+
+
+			}
+		}
+
+		function randomChoice(arr)
+		{
+			return arr[Math.floor(Math.random(1,10)*arr.length)];
+		}
+		 
+
+		 
+			 
+blobs.push(new Blob("yellow",55))	
+blobs.push(new Blob("red",50))
+blobs.push(new Blob("brown",50))
+blobs.push(new Blob("pink",50))
+blobs.push(new Blob("crimson red",50))
+blobs.push(new Blob("indigo",50))
+blobs.push(new Blob("orange",50))
+blobs.push(new Blob("purple",50))
+blobs.push(new Blob("green",50))
+blobs.push(new Blob("blue",50))
+
+	 
+
+
+		function canvasDraw()
+		{
+			context.clearRect(0,0,canvas.width,canvas.height);
+			 
+			blobs.forEach(function(obj){
+				obj.draw();
+				obj.move();
+			})
+		}
+
+		setInterval(canvasDraw,10);
+
+
+		newBlob.draw();
+		
+	 
+
+	 </script>
+		   
+ </body>
+ </html>
